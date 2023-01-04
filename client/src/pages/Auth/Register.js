@@ -28,6 +28,7 @@ import AppleIcon from "@mui/icons-material/Apple";
 import { styled } from "@mui/material/styles";
 import visbleIcon from "../../packages/images/visible.png";
 import invisbleIcon from "../../packages/images/invisible.png";
+import { Datewish } from "../../util/Datewish";
 
 function Register() {
   const imgUrl =
@@ -183,20 +184,20 @@ function Register() {
                   Password
                 </label>
 
-                <IconButton onClick={toggleSecureEntry}>
-                  <img
-                    src={secureTextEntry ? invisbleIcon : visbleIcon}
-                    width={20}
-                    height={20}
-                    alt="visbleIcon"
-                    style={{
-                      position: "absolute",
-                      marginLeft: 600,
-                      marginTop: 12,
-                      color: "#000",
-                    }}
-                  />
-                </IconButton>
+                <img
+                  onClick={toggleSecureEntry}
+                  src={secureTextEntry ? invisbleIcon : visbleIcon}
+                  width={20}
+                  height={20}
+                  alt="visbleIcon"
+                  style={{
+                    position: "absolute",
+                    marginLeft: 300,
+                    marginTop: 12,
+                    color: "#000",
+                    cursor: "pointer",
+                  }}
+                />
 
                 <input
                   type={secureTextEntry ? "text" : "password"}
@@ -230,20 +231,22 @@ function Register() {
                 >
                   Confirm Password
                 </label>
-                <IconButton onClick={toggleConfirmEntry}>
-                  <img
-                    src={confirmTextEntry ? invisbleIcon : visbleIcon}
-                    width={20}
-                    height={20}
-                    alt="visbleIcon"
-                    style={{
-                      position: "absolute",
-                      marginLeft: 480,
-                      marginTop: 12,
-                      color: "#000",
-                    }}
-                  />
-                </IconButton>
+
+                <img
+                  onClick={toggleConfirmEntry}
+                  src={confirmTextEntry ? invisbleIcon : visbleIcon}
+                  width={20}
+                  height={20}
+                  alt="visbleIcon"
+                  style={{
+                    position: "absolute",
+                    marginLeft: 235,
+                    marginTop: 12,
+                    color: "#000",
+                    cursor: "pointer",
+                  }}
+                />
+
                 <input
                   type={confirmTextEntry ? "text" : "password"}
                   name="password"
@@ -306,7 +309,7 @@ function Register() {
                 ></Button>
 
                 <Typography marginTop={6}>
-                  By singing up, you agree with the
+                  By signing up, you agree with the
                 </Typography>
                 <div style={{ display: "flex" }}>
                   <Link>Terms of Use&nbsp;</Link>
@@ -318,7 +321,7 @@ function Register() {
           </Grid>
         </Grid>
         <Grid item xs={6} style={{ backgroundColor: "#e2e2e2" }}>
-          <div style={{ marginTop: 80 }}>
+          <div style={{ marginTop: 80, marginLeft: 160 }}>
             <img
               src="https://onfire.craftwork.design/images/s-5-img-4.png"
               width="650"
@@ -342,7 +345,7 @@ function Register() {
               textAlign="center"
               fontSize={14}
             >
-              Good Morning
+              {Datewish(new Date())}
             </Typography>
           </div>
         </Grid>

@@ -143,8 +143,8 @@ function Login() {
                 />
               </div>
               <FormHelperText error>
-              {formik.touched.email ? formik.errors.email : null}
-            </FormHelperText>
+                {formik.touched.email ? formik.errors.email : null}
+              </FormHelperText>
               <div
                 class="full-input"
                 style={{
@@ -166,20 +166,19 @@ function Login() {
                   Password
                 </label>
 
-                <IconButton onClick={toggleSecureEntry}>
-                  <img
-                    src={secureTextEntry ? invisbleIcon : visbleIcon}
-                    width={20}
-                    height={20}
-                    alt="visbleIcon"
-                    style={{
-                      position: "absolute",
-                      marginLeft: 600,
-                      marginTop: 12,
-                      color: "#000",
-                    }}
-                  />
-                </IconButton>
+                <img
+                  onClick={toggleSecureEntry}
+                  src={secureTextEntry ? invisbleIcon : visbleIcon}
+                  width={20}
+                  height={20}
+                  alt="visbleIcon"
+                  style={{
+                    position: "absolute",
+                    marginLeft: 300,
+                    marginTop: 12,
+                    color: "#000",
+                  }}
+                />
 
                 <input
                   type={secureTextEntry ? "text" : "password"}
@@ -191,8 +190,8 @@ function Login() {
                 />
               </div>
               <FormHelperText error>
-              {formik.touched.password ? formik.errors.password : null}
-            </FormHelperText>
+                {formik.touched.password ? formik.errors.password : null}
+              </FormHelperText>
               <Grid container marginTop={4}>
                 <Grid item xs>
                   <FormControlLabel
