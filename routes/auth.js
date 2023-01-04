@@ -12,8 +12,8 @@ const transporter = nodemailer.createTransport({
   port: 465, // true for 465, false for other ports
   host: "smtp.gmail.com",
   auth: {
-    user: "joseferrar4@gmail.com",
-    pass: "vwjukyrzifzwctac",
+    user: "krugerrex4@gmail.com",
+    pass: "zdulxbvjwzyqpcva",
   },
   secure: true,
 });
@@ -67,49 +67,68 @@ router.post("/api/login", (req, res) => {
       });
   });
 });
-router.post("/api/reset", async (req, res) => {
-  const { text } = req.body;
-  const mailData = {
-    from: "joseferrar4@gmail.com", // sender address
-    to: "joseferrar4@gmail.com", // list of receivers
-    subject: "Sending Email using Node.js",
-    text: text,
-    html: `<b>Hey spiderman! </b>  <br> This is our first message sent with ${text}<br/>`,
-  };
+// router.post("/api/reset", async (req, res) => {
+//   const { text } = req.body;
+//   const mailData = {
+//     from: "krugerrex4@gmail.com", // sender address
+//     to: "joseferrar4@gmail.com", // list of receivers
+//     subject: "Sending Email using Node.js",
+//     text: text,
+//     html: `<b>Hey spiderman! </b>  <br> This is our first message sent with ${text}<br/>`,
+//   };
 
-  transporter.sendMail(mailData, function (err, info) {
-    if(err)
-      console.log(err)
-    else {
-      res.status(200).send({ message: "Mail send", message_id: info.messageId})
-    }
- });
-});
-
+//   transporter.sendMail(mailData, function (err, info) {
+//     if (err) console.log(err);
+//     else {
+//       res
+//         .status(200)
+//         .send({ message: "Mail send", message_id: info.messageId });
+//     }
+//   });
+// });
 
 router.post("/api/sendmail", async (req, res) => {
   try {
+    const user = await authSchema.findOne({ email: req.body.email });
+    if (!user)
+      return res.status(400).send("user with given email doesn't exist");
 
+    let token = await Token.findOne({ userId: user._id });
+    if (!token) {
+      token = await new Token({
+        userId: user._id,
+        token: crypto.randomBytes(32).toString("hex"),
+      }).save();
+    }
 
-      const user = await authSchema.findOne({ email: req.body.email });
-      if (!user)
-          return res.status(400).send("user with given email doesn't exist");
+    const link = `${process.env.BASE_URL}/api/${user._id}/${token.token}`;
+    await sendEmail(user.email, "Password reset", link);
 
-      let token = await Token.findOne({ userId: user._id });
-      if (!token) {
-          token = await new Token({
-              userId: user._id,
-              token: crypto.randomBytes(32).toString("hex"),
-          }).save();
-      }
-
-      const link = `${process.env.BASE_URL}/password-reset/${user._id}/${token.token}`;
-      await sendEmail(user.email, "Password reset", link);
-
-      res.send("password reset link sent to your email account");
+    res.send("password reset link sent to your email account");
   } catch (error) {
-      res.send("An error occured");
-      console.log(error);
+    res.send("An error occured");
+    console.log(error);
+  }
+});
+
+router.post("/api/:userId/:token", async (req, res) => {
+  try {
+    const user = await authSchema.findById(req.params.userId);
+    if (!user) return res.status(400).send("invalid link or expired");
+    const token = await Token.findOne({
+      userId: user._id,
+      token: req.params.token,
+    });
+    if (!token) return res.status(400).send("Invalid link or expired");
+    var hash = await bcrypt.hash(req.body.password, 10);
+    user.password = hash;
+    await user.save();
+    await token.delete();
+
+    res.send("password reset sucessfully.");
+  } catch (error) {
+    res.send("An error occured");
+    console.log(error);
   }
 });
 
