@@ -34,3 +34,18 @@ export const LoginApi = (data, navigate) => {
   };
 };
 
+export const ForgotApi = (data) => {
+  return (dispatch) => {
+    REACT_URL.post("/sendmail", data)
+      .then((res) => {
+        console.log(res.data);
+        dispatch(AuthAction(res.data));
+        toast.success("Check your email");
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        toast.error(err.response.data.error);
+      });
+  };
+};
+

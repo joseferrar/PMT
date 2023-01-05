@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   auth: {
     user: "krugerrex4@gmail.com",
-    pass: "zdulxbvjwzyqpcva",
+    pass: "jqyhvvvjfzecheab",
   },
   secure: true,
 });
@@ -104,7 +104,7 @@ router.post("/api/sendmail", async (req, res) => {
     const link = `${process.env.BASE_URL}/api/${user._id}/${token.token}`;
     await sendEmail(user.email, "Password reset", link);
 
-    res.send("password reset link sent to your email account");
+    res.json({userId: user._id, token: token.token});
   } catch (error) {
     res.send("An error occured");
     console.log(error);

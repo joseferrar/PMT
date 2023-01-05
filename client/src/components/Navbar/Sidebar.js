@@ -29,7 +29,10 @@ function Sidebar() {
           <ListItemAvatar>
             <Avatar alt="Profile Picture" src={imgUrl} />
           </ListItemAvatar>
-          <ListItemText primary={"Product Name"} secondary={"Category"} />
+          <ListItemText
+            primary={<Typography fontWeight={"bold"}>Project Name</Typography>}
+            secondary={"Category"}
+          />
         </ListItem>
 
         {/* <Divider /> */}
@@ -45,7 +48,13 @@ function Sidebar() {
         </List>
         <Divider />
         <List>
-          <Typography fontWeight="bold" marginLeft={2} marginTop={5} marginBottom={1} fontSize={14}>
+          <Typography
+            fontWeight="bold"
+            marginLeft={2}
+            marginTop={5}
+            marginBottom={1}
+            fontSize={14}
+          >
             Report
           </Typography>
           {report.map((item, index) => (
@@ -59,7 +68,13 @@ function Sidebar() {
         </List>
 
         <List>
-          <Typography fontWeight="bold" marginLeft={2} marginTop={5} marginBottom={1} fontSize={14}>
+          <Typography
+            fontWeight="bold"
+            marginLeft={2}
+            marginTop={5}
+            marginBottom={1}
+            fontSize={14}
+          >
             Personal
           </Typography>
           {personal.map((item, index) => (

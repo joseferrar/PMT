@@ -10,6 +10,8 @@ import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import { avatar_group } from "../dummyData/avatarData";
 import AdminCard from "../components/Cards/AdminCard";
+import RevenueCard from "../components/Cards/RevenueCard";
+import RevenueChart from "../components/Charts/RevenueChart";
 
 function Home() {
   const navigate = useNavigate();
@@ -60,6 +62,24 @@ function Home() {
           </Grid>
         </Grid>
         <AdminCard />
+
+        <Grid container spacing={3} marginTop={3}>
+          <Grid item xs={6} md={6} sm={3}>
+            <Typography
+              fontWeight={"bold"}
+              fontSize={22}
+              fontFamily="inherit"
+              margin={2}
+            >
+              Revenue
+            </Typography>
+            <RevenueCard />
+          </Grid>
+
+          <Grid item xs={6} md={5} sm={3} marginTop={12}>
+            <RevenueChart />
+          </Grid>
+        </Grid>
       </Paper>
 
       {/* <Button variant="contained" onClick={() => navigate("/login")}>

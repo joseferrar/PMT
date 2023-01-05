@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import Forgot from "../pages/Auth/Forgot";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import Home from "../pages/Home";
@@ -12,6 +13,7 @@ function RouteFC() {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot" element={<Forgot />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/home" element={<Home />} />
         </Route>
