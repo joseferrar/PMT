@@ -40,11 +40,11 @@ function Header(props) {
     <Box sx={{ display: "flex" }}>
       {/* <CssBaseline /> */}
       <AppBar
-        elevation={0}
+        elevation={1}
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
-          backgroundColor: "rgba(0, 0, 0, 0.04)",
+          backgroundColor: "#fff",
         }}
       >
         <Toolbar>
@@ -109,8 +109,8 @@ function Header(props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              backgroundColor: "rgba(0, 0, 0, 0.04)",
-              border: "none",
+              backgroundColor: "#fff",
+              // border: "none",
             },
           }}
         >
@@ -123,8 +123,8 @@ function Header(props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              backgroundColor: "rgba(0, 0, 0, 0.04)",
-              border: "none",
+              backgroundColor: "#fff",
+              // border: "none",
             },
           }}
           open

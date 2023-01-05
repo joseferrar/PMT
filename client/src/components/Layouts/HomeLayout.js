@@ -10,7 +10,7 @@ export default function HomeLayout({ children }) {
         style={{
           width: "100%",
           padding: 20,
-          marginTop: 30,
+          marginTop: 60,
           marginBottom: 20,
           overflowY: "hidden",
         }}
