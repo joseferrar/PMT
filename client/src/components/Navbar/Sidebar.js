@@ -22,6 +22,13 @@ const imgUrl =
 function Sidebar() {
   const location = useLocation();
   const navigate = useNavigate();
+
+  const dash = {
+    backgroundColor: "#5540ff",
+    paddingLeft: 2,
+    color: "white",
+  }
+
   return (
     <div>
       <div>
@@ -31,17 +38,31 @@ function Sidebar() {
           </ListItemAvatar>
           <ListItemText
             primary={<Typography fontWeight={"bold"}>Project Name</Typography>}
-            secondary={"Category"}
+            secondary={
+              <Typography fontFamily={"Poppins"} fontSize={12} color="gray">
+                Category
+              </Typography>
+            }
           />
         </ListItem>
 
         {/* <Divider /> */}
         <List>
           {userRoutes.map((item, index) => (
-            <ListItem key={index} disablePadding style={{ paddingLeft: 15 }}>
+            <ListItem key={index} disablePadding style={item.name === "Dashboard" ? dash : null}>
               <ListItemButton>
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.name} />
+                <ListItemIcon style={{color: item.name === "Dashboard" ? "white" : null}}>{item.icon}</ListItemIcon>
+                <ListItemText
+                  primary={
+                    <Typography
+                      fontFamily={"Poppins"}
+                      fontSize={14}
+                      color={item.name === "Dashboard" ? "#fff" : "gray"}
+                    >
+                      {item.name}
+                    </Typography>
+                  }
+                />
               </ListItemButton>
             </ListItem>
           ))}
@@ -61,7 +82,17 @@ function Sidebar() {
             <ListItem key={index} disablePadding style={{ paddingLeft: 15 }}>
               <ListItemButton>
                 <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.name} />
+                <ListItemText
+                  primary={
+                    <Typography
+                      fontFamily={"Poppins"}
+                      fontSize={14}
+                      color="gray"
+                    >
+                      {item.name}
+                    </Typography>
+                  }
+                />
               </ListItemButton>
             </ListItem>
           ))}
@@ -81,7 +112,17 @@ function Sidebar() {
             <ListItem key={index} disablePadding style={{ paddingLeft: 15 }}>
               <ListItemButton>
                 <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.name} />
+                <ListItemText
+                  primary={
+                    <Typography
+                      fontFamily={"Poppins"}
+                      fontSize={14}
+                      color="gray"
+                    >
+                      {item.name}
+                    </Typography>
+                  }
+                />
               </ListItemButton>
             </ListItem>
           ))}

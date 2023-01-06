@@ -12,6 +12,7 @@ import { avatar_group } from "../dummyData/avatarData";
 import AdminCard from "../components/Cards/AdminCard";
 import RevenueCard from "../components/Cards/RevenueCard";
 import RevenueChart from "../components/Charts/RevenueChart";
+import ProjectTable from "../components/Tables/ProjectTable";
 
 function Home() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ function Home() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={3}>
           <Grid item xs={4} md={3} sm={3}>
-            <Typography fontWeight={"bold"} fontSize={30} fontFamily="inherit">
+            <Typography fontWeight={"bold"} fontSize={30} fontFamily="gothic">
               Dashboard
             </Typography>
           </Grid>
@@ -36,10 +37,15 @@ function Home() {
         </Grid>
       </Box>
 
-      <Paper style={{ paddingBottom: 12, paddingLeft: 12 }}>
+      <Paper style={{ paddingBottom: 12, paddingLeft: 12 }} elevation={0}>
         <Grid container spacing={3} marginTop={3}>
           <Grid item xs={4} md={3} sm={3}>
-            <Typography fontWeight={"bold"} fontSize={22} fontFamily="inherit">
+            <Typography
+              fontWeight={"bold"}
+              fontSize={22}
+              fontFamily="gothic"
+              marginLeft={4}
+            >
               Overview
             </Typography>
           </Grid>
@@ -63,13 +69,14 @@ function Home() {
         </Grid>
         <AdminCard />
 
-        <Grid container spacing={3} marginTop={3}>
-          <Grid item xs={6} md={6} sm={3}>
+        <Grid container spacing={3} marginTop={3} marginBottom={3}>
+          <Grid item xs={6} md={5} sm={3}>
             <Typography
               fontWeight={"bold"}
               fontSize={22}
-              fontFamily="inherit"
-              margin={2}
+              fontFamily="gothic"
+              marginLeft={4}
+              marginBottom={3}
             >
               Revenue
             </Typography>
@@ -85,6 +92,17 @@ function Home() {
       {/* <Button variant="contained" onClick={() => navigate("/login")}>
         Logout
       </Button> */}
+      <Paper style={{ padding: 33, marginTop: 40 }} elevation={0}>
+        <Typography
+          fontWeight={"bold"}
+          fontSize={26}
+          fontFamily="gothic"
+          margin={2}
+        >
+          Recent Projects
+        </Typography>
+        <ProjectTable />
+      </Paper>
     </div>
   );
 }

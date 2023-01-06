@@ -17,9 +17,9 @@ import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 function AdminCard() {
   return (
     <Grid container spacing={2} marginTop={2}>
-      <Grid item xs={12} md={3} sm={3}>
+      <Grid item xs={12} md={3.5} sm={3} marginLeft={12}>
         <Card
-          sx={{ width: 340, backgroundColor: "#fdc8e4", borderRadius: 3 }}
+          sx={{ width: 400, backgroundColor: "#fdc8e4", borderRadius: 3 }}
           elevation={0}
         >
           <CardContent>
@@ -28,6 +28,7 @@ function AdminCard() {
                 sx={{ mb: 1.5, color: "#000" }}
                 color="text.secondary"
                 fontSize={16}
+                fontFamily={"Poppins"}
               >
                 Expenses
               </Typography>
@@ -76,9 +77,9 @@ function AdminCard() {
         </Card>
       </Grid>
 
-      <Grid item xs={12} md={3} sm={3}>
+      <Grid item xs={12} md={3.5} sm={3}>
         <Card
-          sx={{ width: 340, backgroundColor: "#fddcc8", borderRadius: 3 }}
+          sx={{ width: 400, backgroundColor: "#fddcc8", borderRadius: 3 }}
           elevation={0}
         >
           <CardContent>
@@ -87,6 +88,7 @@ function AdminCard() {
                 sx={{ mb: 1.5, color: "#000" }}
                 color="text.secondary"
                 fontSize={16}
+                fontFamily={"Poppins"}
               >
                 Profit
               </Typography>
@@ -142,9 +144,9 @@ function AdminCard() {
         </Card>
       </Grid>
 
-      <Grid item xs={12} md={3} sm={3}>
+      <Grid item xs={12} md={3.5} sm={3}>
         <Card
-          sx={{ width: 340, backgroundColor: "#fddcc8", borderRadius: 3 }}
+          sx={{ width: 400, backgroundColor: "#ccfdc8", borderRadius: 3 }}
           elevation={0}
         >
           <CardContent>
@@ -153,8 +155,9 @@ function AdminCard() {
                 sx={{ mb: 1.5, color: "#000" }}
                 color="text.secondary"
                 fontSize={16}
+                fontFamily={"Poppins"}
               >
-                Profit
+                Revenue
               </Typography>
               <div
                 style={{

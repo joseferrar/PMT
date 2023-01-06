@@ -7,7 +7,7 @@ import { Grid } from "@mui/material";
 function RevenueCard() {
   return (
     <div>
-      <Grid item xs={12} md={3} sm={3} marginLeft={1}>
+      <Grid item xs={12} md={4} sm={3} marginLeft={14}>
         <Card
           sx={{
             width: 340,
@@ -25,6 +25,7 @@ function RevenueCard() {
                 sx={{ mb: 1.5, color: "#9999ad" }}
                 color="text.secondary"
                 fontSize={16}
+                fontFamily={"Poppins"}
               >
                 Active Projects
               </Typography>
@@ -56,6 +57,7 @@ function RevenueCard() {
                 sx={{ mb: 1.5, color: "#9999ad" }}
                 color="text.secondary"
                 fontSize={16}
+                fontFamily={"Poppins"}
               >
                 Active Empolyees
               </Typography>
@@ -90,6 +92,7 @@ function RevenueCard() {
                 sx={{ mb: 1.5, color: "#9999ad" }}
                 color="text.secondary"
                 fontSize={16}
+                fontFamily={"Poppins"}
               >
                 Total Profits
               </Typography>
