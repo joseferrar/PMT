@@ -47,7 +47,7 @@ function Login() {
         .min(6, "6 characters required"),
     }),
     onSubmit: async (data) => {
-      dispatch(LoginApi(data, navigate));
+    await dispatch(LoginApi(data, navigate));
     },
   });
 
@@ -114,7 +114,7 @@ function Login() {
             </Typography>
             <form autoComplete="off">
               <div
-                class="full-input"
+                className="full-input"
                 style={{
                   padding: "3px",
                   display: "inline-block",
@@ -146,7 +146,7 @@ function Login() {
                 {formik.touched.email ? formik.errors.email : null}
               </FormHelperText>
               <div
-                class="full-input"
+                className="full-input"
                 style={{
                   padding: "3px",
                   display: "inline-block",

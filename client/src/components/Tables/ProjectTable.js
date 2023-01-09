@@ -167,13 +167,13 @@ function ProjectTable() {
         <ReactPaginate
           previousLabel={
             <ArrowLeftIcon
-              style={{ color: offset === 0 && "gray", fontSize: 26 }}
+              style={{ color: offset === 0 && "#000", fontSize: 26 }}
             />
           }
           nextLabel={
             <ArrowRightIcon
               style={{
-                color: pageCount === tableData.length && "gray",
+                color: pageCount === tableData.length && "#000",
                 fontSize: 26,
               }}
             />

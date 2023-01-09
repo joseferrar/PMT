@@ -57,7 +57,7 @@ router.post("/api/login", (req, res) => {
         if (doMatch) {
           const { _id, username, email } = savedUser;
           // res.json({ user: { _id, name, email } });
-          res.json({ message: "successfully signed in" });
+          res.json({ message: "successfully signed in", _id });
         } else {
           return res.status(422).json({ error: "Invalid Password" });
         }
@@ -90,21 +90,23 @@ router.post("/api/login", (req, res) => {
 router.post("/api/sendmail", async (req, res) => {
   try {
     const user = await authSchema.findOne({ email: req.body.email });
-    if (!user)
-      return res.status(400).send("user with given email doesn't exist");
+    await authSchema.findOne({ email: req.body.email }).then((savedUser) => {
+      if (!savedUser) {
+        return res.status(422).json({ error: "user with given email doesn't exist" });
+      }
+      let token = Token.findOne({ userId: user._id });
+      if (!token) {
+        token = new Token({
+          userId: user._id,
+          token: crypto.randomBytes(32).toString("hex"),
+        }).save();
+      }
 
-    let token = await Token.findOne({ userId: user._id });
-    if (!token) {
-      token = await new Token({
-        userId: user._id,
-        token: crypto.randomBytes(32).toString("hex"),
-      }).save();
-    }
+      const link = `${process.env.BASE_URL}/api/${user._id}/${token.token}`;
+      sendEmail(user.email, "Password reset", link);
 
-    const link = `${process.env.BASE_URL}/api/${user._id}/${token.token}`;
-    await sendEmail(user.email, "Password reset", link);
-
-    res.json({userId: user._id, token: token.token});
+      res.json({ userId: user._id, token: token.token });
+    });
   } catch (error) {
     res.send("An error occured");
     console.log(error);
@@ -132,4 +134,26 @@ router.post("/api/:userId/:token", async (req, res) => {
   }
 });
 
+//update user
+router.put("/api/edituser/:id", async (req, res) => {
+  const update = await authSchema.findByIdAndUpdate(
+    { _id: req.params.id },
+    { $set: req.body }
+  );
+  res.json(update);
+});
+
+router.get("/api/myprofile/:id", async (req, res) => {
+  authSchema
+    .findById(req.params.id)
+    .then((myprofile) => {
+      res.json(myprofile);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 module.exports = router;
+
+const arr = [{ id: 1, name: "test" }];

@@ -4,9 +4,11 @@ import Forgot from "../pages/Auth/Forgot";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import Home from "../pages/Home";
+import Profile from "../pages/Profile";
 import ProtectedRoute from "./ProductedRoute";
 
 function RouteFC() {
+
   return (
     <>
       <Routes>
@@ -16,6 +18,7 @@ function RouteFC() {
         <Route path="/forgot" element={<Forgot />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/home" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </>

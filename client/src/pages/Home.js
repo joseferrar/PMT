@@ -9,6 +9,7 @@ import DateMenu from "../components/Menus/DateMenu";
 import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import { avatar_group } from "../dummyData/avatarData";
+import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import AdminCard from "../components/Cards/AdminCard";
 import RevenueCard from "../components/Cards/RevenueCard";
 import RevenueChart from "../components/Charts/RevenueChart";
@@ -93,14 +94,50 @@ function Home() {
         Logout
       </Button> */}
       <Paper style={{ padding: 33, marginTop: 40 }} elevation={0}>
-        <Typography
-          fontWeight={"bold"}
-          fontSize={26}
-          fontFamily="gothic"
-          margin={2}
-        >
-          Recent Projects
-        </Typography>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <Typography
+            fontWeight={"bold"}
+            fontSize={26}
+            fontFamily="gothic"
+            margin={2}
+          >
+            Recent Projects
+          </Typography>
+          <Button
+            startIcon={<FilterAltOutlinedIcon />}
+            variant="contained"
+            size="small"
+            style={{
+              backgroundColor: "#e0e0e0",
+              color: "#000",
+              borderRadius: 15,
+              boxShadow: "none",
+              width: 80,
+              height: 35,
+              fontFamily: "gothic",
+              textTransform: "capitalize",
+              marginRight: 12,
+              marginLeft: "auto",
+            }}
+          >
+            Filter
+          </Button>
+          <Button
+            variant="contained"
+            size="small"
+            style={{
+              backgroundColor: "#b9beff",
+              color: "#001af4",
+              borderRadius: 15,
+              boxShadow: "none",
+              width: 80,
+              height: 35,
+              textTransform: "capitalize",
+            }}
+          >
+            Export
+          </Button>
+        </div>
         <ProjectTable />
       </Paper>
     </div>

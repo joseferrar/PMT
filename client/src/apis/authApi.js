@@ -8,7 +8,7 @@ export const RegisterApi = (data, navigate) => {
       .then((res) => {
         console.log(res.data);
         dispatch(AuthAction(res.data));
-        navigate('/login')
+        navigate("/login");
         toast.success("Register Successfully");
       })
       .catch((err) => {
@@ -24,8 +24,10 @@ export const LoginApi = (data, navigate) => {
       .then((res) => {
         console.log(res.data);
         dispatch(AuthAction(res.data));
-        navigate('/home')
+        localStorage.setItem("login", JSON.stringify(res.data));
+
         toast.success("Login Successfully");
+        navigate("/home");
       })
       .catch((err) => {
         console.log(err.response.data);
@@ -49,3 +51,31 @@ export const ForgotApi = (data) => {
   };
 };
 
+export const UpdateUserApi = (id, data) => {
+  return (dispatch) => {
+    REACT_URL.put(`/edituser/${id}`, data)
+      .then((res) => {
+        console.log(res.data);
+        dispatch(AuthAction(res.data));
+        toast.success("Update Successfully!!!");
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        toast.error(err.response.data.error);
+      });
+  };
+};
+
+export const GetUserApi = (id) => {
+  return (dispatch) => {
+    REACT_URL.get(`/myprofile/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        dispatch(AuthAction(res.data));
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        toast.error(err.response.data.error);
+      });
+  };
+};
