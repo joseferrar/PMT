@@ -2,12 +2,22 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
-const cors = require("cors");
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+
+let corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 //cors
-app.use(cors());
+// app.use(cors());
 
 //request json
 app.use(express.json());

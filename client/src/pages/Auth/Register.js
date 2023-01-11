@@ -29,6 +29,7 @@ import { styled } from "@mui/material/styles";
 import visbleIcon from "../../packages/images/visible.png";
 import invisbleIcon from "../../packages/images/invisible.png";
 import { Datewish } from "../../util/Datewish";
+import CryptoJS from "crypto-js";
 
 function Register() {
   const imgUrl =
@@ -57,7 +58,16 @@ function Register() {
         .oneOf([yup.ref("password"), null], "Password not match"),
     }),
     onSubmit: async (data) => {
-      dispatch(RegisterApi(data, navigate));
+      var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data.password, data.confirmPassword), 'my-secret-key@123').toString();
+      console.log(ciphertext);
+      const userData= {
+        name: data.name,
+        email: data.email,
+        password: ciphertext,
+        confirmPassword: ciphertext
+      }
+      // window.localStorage.setItem('pass_check', JSON.stringify(userData))
+      dispatch(RegisterApi(userData, navigate));
     },
   });
 

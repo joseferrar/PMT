@@ -7,13 +7,25 @@ import Grid from "@mui/material/Grid";
 import EditIcon from "@mui/icons-material/Edit";
 import { useSelector, useDispatch } from "react-redux";
 import { UpdateUserApi, GetUserApi } from "../apis/authApi";
+import AlertModal from "../components/Modals/AlertModal";
+import CryptoJS from "crypto-js";
 
 function Profile() {
-  const [edit, setEdit] = useState(true);
+  const [edit, setEdit] = useState(false);
   const user = useSelector((state) => state.auth.data);
   const dispatch = useDispatch();
   const getdata = localStorage.getItem("login");
   const userId = JSON.parse(getdata);
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     dispatch(GetUserApi(userId._id));
@@ -30,10 +42,24 @@ function Profile() {
     },
     onSubmit: async (data) => {
       await dispatch(UpdateUserApi(userId._id, data));
-      setEdit(true)
+      setEdit(true);
     },
   });
 
+  if (edit) {
+    return <AlertModal setOpen={setOpen} open={open} />;
+  }
+
+  const secretPass = "XkhZG4fW2t2W";
+
+  const encryptData = () => {
+    const data = CryptoJS.AES.encrypt(
+      JSON.stringify("text"),
+      secretPass
+    ).toString();
+
+    console.log(data)
+  };
   return (
     <div>
       <div style={{ display: "flex" }}>
@@ -86,7 +112,7 @@ function Profile() {
 
       <Button
         variant="contained"
-        onClick={formik.handleSubmit}
+        onClick={encryptData}
         size="large"
         style={{ marginTop: 22 }}
         disabled={edit}
@@ -94,6 +120,7 @@ function Profile() {
       >
         Submit
       </Button>
+      {/* <AlertModal setOpen={setOpen} open={open} /> */}
     </div>
   );
 }

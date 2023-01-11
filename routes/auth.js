@@ -3,7 +3,7 @@ const router = express.Router();
 const authSchema = require("../schema/Auth");
 const Token = require("../schema/Token");
 const bcrypt = require("bcryptjs");
-const crypto = require("crypto");
+const CryptoJS = require("crypto-js");
 const nodemailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
 const sendEmail = require("../util/sendEmail");
@@ -26,7 +26,14 @@ router.post("/api/register", async (req, res) => {
       return res.status(400).json({ message: "Email already exists" });
     }
     var hash = await bcrypt.hash(req.body.password, 10);
+    // var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(req.body.password), 'my-secret-key@123').toString();
 
+    // //log decrypted Data
+    // console.log('decrypted Data -')
+    // console.log(ciphertext);
+    var bytes = CryptoJS.AES.decrypt(req.body.password, "my-secret-key@123");
+    var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    var hash = await bcrypt.hash(decryptedData, 10);
     const user = await new authSchema({
       name: req.body.name,
       email: req.body.email,
@@ -46,13 +53,19 @@ router.post("/api/register", async (req, res) => {
 //login api
 router.post("/api/login", (req, res) => {
   const { email, password } = req.body;
+  console.log("passs", password);
+  console.log(req.body);
+
+  var bytes = CryptoJS.AES.decrypt(password, "my-secret-key@123");
+  var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
   authSchema.findOne({ email: email }).then((savedUser) => {
     if (!savedUser) {
       return res.status(422).json({ error: "Invalid Email" });
     }
+
     bcrypt
-      .compare(password, savedUser.password)
+      .compare(decryptedData, savedUser.password)
       .then((doMatch) => {
         if (doMatch) {
           const { _id, username, email } = savedUser;
@@ -92,7 +105,9 @@ router.post("/api/sendmail", async (req, res) => {
     const user = await authSchema.findOne({ email: req.body.email });
     await authSchema.findOne({ email: req.body.email }).then((savedUser) => {
       if (!savedUser) {
-        return res.status(422).json({ error: "user with given email doesn't exist" });
+        return res
+          .status(422)
+          .json({ error: "user with given email doesn't exist" });
       }
       let token = Token.findOne({ userId: user._id });
       if (!token) {
@@ -155,5 +170,3 @@ router.get("/api/myprofile/:id", async (req, res) => {
 });
 
 module.exports = router;
-
-const arr = [{ id: 1, name: "test" }];

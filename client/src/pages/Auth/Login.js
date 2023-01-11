@@ -24,11 +24,19 @@ import visbleIcon from "../../packages/images/visible.png";
 import invisbleIcon from "../../packages/images/invisible.png";
 import bulbIcon from "../../packages/images/idea.png";
 import { LoginApi } from "../../apis/authApi";
+import CryptoJS from "crypto-js";
+import bcrypt from "bcryptjs";
 
 const imgUrl =
   "https://camo.githubusercontent.com/a86a8278da4c5b5a43330e1ea28e6ba050007a837128b5dff5b35d5ff0f1248a/68747470733a2f2f63646e2d696d616765732d312e6d656469756d2e636f6d2f6d61782f313630302f312a365867664443566e3831415958363858766432492d674032782e706e67";
 
+  const pass = {
+    password: '1234'
+  }
 function Login() {
+  // var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(pass), 'my-secret-key@123').toString();
+  // console.log(ciphertext);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [secureTextEntry, setSecureTextEntry] = useState(false);
@@ -44,10 +52,34 @@ function Login() {
       password: yup
         .string()
         .required("Password is required")
-        .min(6, "6 characters required"),
     }),
     onSubmit: async (data) => {
-    await dispatch(LoginApi(data, navigate));
+      var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data.password), 'my-secret-key@123').toString();
+      console.log(ciphertext);
+      // //log decrypted Data
+      // console.log('decrypted Data -')
+      // console.log(decryptedData);
+      // bcrypt.compare(
+      //   data.password,
+      //   getHashedPassword.password,
+      //   function (err, isMatch) {
+      //     if (err) {
+      //       throw err;
+      //     } else if (!isMatch) {
+      //       console.log("Password does't match!");
+      //     } else {
+      //       console.log("password matches");
+      //     }
+      //   }
+      // );
+      const userData = {
+        email: data.email,
+        password: ciphertext,
+      };
+
+      dispatch(LoginApi(userData, navigate));
+
+ 
     },
   });
 

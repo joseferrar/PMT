@@ -27,7 +27,7 @@ import { useNavigate } from "react-router-dom";
 const drawerWidth = 240;
 
 function Header(props) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -38,25 +38,25 @@ function Header(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-    const [auth, setAuth] = React.useState(true);
-    const [anchorEl, setAnchorEl] = React.useState(null);
-  
-    const handleChange = (event) => {
-      setAuth(event.target.checked);
-    };
-  
-    const handleMenu = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-  
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-    const logout = () => {
-      localStorage.removeItem("login")
-      navigate('/login')
-    }
+  const handleChange = (event) => {
+    setAuth(event.target.checked);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("login");
+    navigate("/login");
+  };
   return (
     <Box sx={{ display: "flex" }}>
       {/* <CssBaseline /> */}
@@ -97,40 +97,40 @@ function Header(props) {
               <HelpOutlineOutlinedIcon style={{ color: "#000" }} />
             </IconButton>
             {auth && (
-            <div>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircleRoundedIcon style={{color: 'gray'}}/>
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={()=> navigate('/profile')}>My account</MenuItem>
-                <MenuItem onClick={logout}>Logout</MenuItem>
-              </Menu>
-            </div>
-          )}
+              <div>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  <AccountCircleRoundedIcon style={{ color: "gray" }} />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={() => navigate("/profile")}>
+                    My account
+                  </MenuItem>
+                  <MenuItem onClick={logout}>Logout</MenuItem>
+                </Menu>
+              </div>
+            )}
           </Box>
-
-        
         </Toolbar>
       </AppBar>
       <Box
@@ -186,7 +186,6 @@ function Header(props) {
         }}
       >
         <Toolbar />
-        
       </Box>
     </Box>
   );
