@@ -12,13 +12,13 @@ const userRoutes = [
   {
     id: 1,
     name: "Dashboard",
-    path: "/",
+    path: "/dashboard",
     icon: <DashboardIcon width={20} height={20} />,
   },
   {
     id: 2,
     name: "Products",
-    path: "shops",
+    path: "/projects",
     icon: <FolderOpenOutlinedIcon width={20} height={20} />,
   },
 ];

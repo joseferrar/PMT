@@ -90,9 +90,7 @@ function Home() {
         </Grid>
       </Paper>
 
-      {/* <Button variant="contained" onClick={() => navigate("/login")}>
-        Logout
-      </Button> */}
+
       <Paper style={{ padding: 33, marginTop: 40 }} elevation={0}>
         <div style={{ display: "flex", alignItems: "center" }}>
           <Typography

@@ -27,7 +27,7 @@ function Sidebar() {
     backgroundColor: "#5540ff",
     paddingLeft: 2,
     color: "white",
-  }
+  };
 
   return (
     <div>
@@ -49,15 +49,26 @@ function Sidebar() {
         {/* <Divider /> */}
         <List>
           {userRoutes.map((item, index) => (
-            <ListItem key={index} disablePadding style={item.name === "Dashboard" ? dash : null}>
+            <ListItem
+              key={index}
+              disablePadding
+              style={item.path === location.pathname ? dash : null}
+              onClick={() => navigate(item.path)}
+            >
               <ListItemButton>
-                <ListItemIcon style={{color: item.name === "Dashboard" ? "white" : null}}>{item.icon}</ListItemIcon>
+                <ListItemIcon
+                  style={{
+                    color: item.path === location.pathname ? "white" : null,
+                  }}
+                >
+                  {item.icon}
+                </ListItemIcon>
                 <ListItemText
                   primary={
                     <Typography
                       fontFamily={"Poppins"}
                       fontSize={14}
-                      color={item.name === "Dashboard" ? "#fff" : "gray"}
+                      color={item.path === location.pathname ? "#fff" : "gray"}
                     >
                       {item.name}
                     </Typography>

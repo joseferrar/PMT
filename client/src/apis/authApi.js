@@ -27,7 +27,7 @@ export const LoginApi = (data, navigate) => {
         localStorage.setItem("login", JSON.stringify(res.data));
 
         toast.success("Login Successfully");
-        navigate("/home");
+        navigate("/dashboard");
       })
       .catch((err) => {
         console.log(err.response.data);

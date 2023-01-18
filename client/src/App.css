@@ -6,6 +6,10 @@
   src: local("gothic"), url("./packages/fonts/SawarabiGothic-Regular.ttf");
 }
 
+@font-face {
+  font-family: "roboto";
+  src: local("roboto"), url("./packages/fonts/Roboto-Bold.ttf");
+}
 html {
   background-color: rgb(0 0 0 / 4%);
   height: 100%;
@@ -51,8 +55,25 @@ html {
   line-height: 1.2em !important;
   font-size: 16px !important;
   padding: 4px !important;
+  width: 98% !important;
   background-color: #e2e2e2 !important;
 }
 .login-form::placeholder {
   font-size: 14px !important;
 }
+
+/* @media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
+  .login-back {
+    margin-left: 100px !important;
+  }
+  .sign-page {
+    margin-left: 100px !important;
+    width: 1000px !important;
+  }
+  .sign-title {
+    width: 500px;
+  }
+} */
