@@ -45,7 +45,7 @@ const report = [
   {
     id: 4,
     name: "Resource",
-    path: "shops",
+    path: "/resource",
     icon: <CodeOutlinedIcon width={20} height={20} />,
   },
   {

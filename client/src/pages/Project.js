@@ -11,8 +11,11 @@ import {
   List,
   ListItemIcon,
   Slider,
+  Stack,
+  Avatar,
+  Badge,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { FormInput, Input, StyledInput } from "../components/Inputs/FormInput";
 import LockIcon from "@mui/icons-material/Lock";
@@ -23,10 +26,17 @@ import BadgeIcon from "@mui/icons-material/Badge";
 import StayCurrentPortraitIcon from "@mui/icons-material/StayCurrentPortrait";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import ArticleIcon from "@mui/icons-material/Article";
+import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import { SelectInput } from "../components/Inputs/SelectInput";
-import { useSelector } from "react-redux";
+import SearchIcon from "@mui/icons-material/Search";
+import { FilePond } from "react-filepond";
+import "filepond/dist/filepond.min.css";
+import { StyledBadge } from "../components/Avater";
+import { tableData } from "../dummyData/tableData";
 
 function Project() {
+  const [files, setFiles] = useState([]);
+  console.log(files.map((item) => console.log(item.file)));
   return (
     <div>
       <Grid container spacing={3}>
@@ -332,23 +342,35 @@ function Project() {
                 >
                   <Grid container spacing={2}>
                     <Grid item xs={12} md={5} sm={3}>
-                    <Typography variant="body" gutterBottom>25% Profit </Typography>
-                      <Slider defaultValue={60} color="primary" disableSwap/>
+                      <Typography variant="body" gutterBottom>
+                        25% Profit{" "}
+                      </Typography>
+                      <Slider defaultValue={60} color="primary" disableSwap />
                     </Grid>
                     <Grid item xs={12} md={4} sm={3}></Grid>
                     <Grid item xs={12} md={3} sm={3}>
-                      <input type="text" style={{height: 35, fontSize: 18, width: "75%"}} value="2000"/>
+                      <input
+                        type="text"
+                        style={{ height: 35, fontSize: 18, width: "75%" }}
+                        value="2000"
+                      />
                     </Grid>
                   </Grid>
 
                   <Grid container spacing={2}>
                     <Grid item xs={12} md={5} sm={3}>
-                    <Typography variant="body" gutterBottom>45% Profit </Typography>
+                      <Typography variant="body" gutterBottom>
+                        45% Profit{" "}
+                      </Typography>
                       <Slider defaultValue={60} color="primary" />
                     </Grid>
                     <Grid item xs={12} md={4} sm={3}></Grid>
                     <Grid item xs={12} md={3} sm={3}>
-                    <input type="text" style={{height: 35, fontSize: 18, width: "75%"}} value="4000"/>
+                      <input
+                        type="text"
+                        style={{ height: 35, fontSize: 18, width: "75%" }}
+                        value="4000"
+                      />
                     </Grid>
                   </Grid>
                 </div>
@@ -376,7 +398,70 @@ function Project() {
                 />
               </ListItem>
             </List>
+            <div
+              style={{
+                width: 300,
+                height: 500,
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            >
+              <FilePond
+                files={files}
+                onupdatefiles={setFiles}
+                allowMultiple={true}
+                maxFiles={3}
+                name="files"
+                labelIdle='Drag & Drop your files here <span class="filepond--label-action">Browse</span>'
+              />
+            </div>
           </Paper>
+          <List dense style={{ marginLeft: 50, marginRight: 50 }}>
+            <ListItem>
+              <ListItemIcon>
+                <PeopleAltOutlinedIcon
+                  color="inherit"
+                  style={{ fontSize: 25 }}
+                />
+              </ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography fontFamily="roboto" fontSize={18} marginLeft={-2}>
+                    Resource Details
+                  </Typography>
+                }
+              />
+            </ListItem>
+          </List>
+          <StyledInput className={"inputWithIcon"}>
+            <button>
+              <SearchIcon />
+            </button>
+            <Input
+              type="text"
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+              style={{ border: "1px solid black" }}
+            />
+          </StyledInput>
+
+          <Stack direction="row" spacing={1} margin={1}>
+            {tableData.map((item, i) => (
+              <StyledBadge
+                key={i}
+                overlap="circular"
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                variant="dot"
+              >
+                <Avatar
+                  alt="badge"
+                  src={item.imgUrl}
+                  sx={{ width: 54, height: 54 }}
+                />
+              </StyledBadge>
+            ))}
+          </Stack>
         </Grid>
       </Grid>
     </div>

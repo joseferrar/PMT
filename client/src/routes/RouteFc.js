@@ -6,6 +6,7 @@ import Register from "../pages/Auth/Register";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import Project from "../pages/Project";
+import Resource from "../pages/Resource";
 import ProtectedRoute from "./ProductedRoute";
 
 function RouteFC() {
@@ -21,6 +22,7 @@ function RouteFC() {
           <Route path="/dashboard" element={<Home />} />
           <Route path="/projects" element={<Project />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/resource" element={<Resource />} />
         </Route>
       </Routes>
     </>

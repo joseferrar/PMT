@@ -90,15 +90,26 @@ function Sidebar() {
             Report
           </Typography>
           {report.map((item, index) => (
-            <ListItem key={index} disablePadding style={{ paddingLeft: 15 }}>
+            <ListItem
+              key={index}
+              disablePadding
+              style={item.path === location.pathname ? dash : null}
+              onClick={() => navigate(item.path)}
+            >
               <ListItemButton>
-                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemIcon
+                  style={{
+                    color: item.path === location.pathname ? "white" : null,
+                  }}
+                >
+                  {item.icon}
+                </ListItemIcon>
                 <ListItemText
                   primary={
                     <Typography
                       fontFamily={"Poppins"}
                       fontSize={14}
-                      color="gray"
+                      color={item.path === location.pathname ? "#fff" : "gray"}
                     >
                       {item.name}
                     </Typography>
